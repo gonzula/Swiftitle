@@ -12,6 +12,9 @@
 		9FBFF6BA2009731D0065D4E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9FBFF6B92009731D0065D4E1 /* Assets.xcassets */; };
 		9FBFF6BD2009731D0065D4E1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9FBFF6BB2009731D0065D4E1 /* Main.storyboard */; };
 		9FBFF6C92009731D0065D4E1 /* SwiftitleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBFF6C82009731D0065D4E1 /* SwiftitleTests.swift */; };
+		9FBFF6D4200973440065D4E1 /* Subtitler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBFF6D3200973440065D4E1 /* Subtitler.swift */; };
+		9FBFF6DD200A803C0065D4E1 /* HashCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBFF6DC200A803C0065D4E1 /* HashCalculator.swift */; };
+		9FBFF6E1200A83930065D4E1 /* SubtitleDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBFF6E0200A83930065D4E1 /* SubtitleDownloader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +38,11 @@
 		9FBFF6C42009731D0065D4E1 /* SwiftitleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftitleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FBFF6C82009731D0065D4E1 /* SwiftitleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftitleTests.swift; sourceTree = "<group>"; };
 		9FBFF6CA2009731D0065D4E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9FBFF6D3200973440065D4E1 /* Subtitler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subtitler.swift; sourceTree = "<group>"; };
+		9FBFF6D5200977F90065D4E1 /* Swiftitle-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Swiftitle-Bridging-Header.h"; sourceTree = "<group>"; };
+		9FBFF6DA200978D60065D4E1 /* libcommonCrypto.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libcommonCrypto.tbd; path = usr/lib/system/libcommonCrypto.tbd; sourceTree = SDKROOT; };
+		9FBFF6DC200A803C0065D4E1 /* HashCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashCalculator.swift; sourceTree = "<group>"; };
+		9FBFF6E0200A83930065D4E1 /* SubtitleDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitleDownloader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +69,7 @@
 				9FBFF6B42009731D0065D4E1 /* Swiftitle */,
 				9FBFF6C72009731D0065D4E1 /* SwiftitleTests */,
 				9FBFF6B32009731D0065D4E1 /* Products */,
+				9FBFF6D9200978D60065D4E1 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -78,10 +87,14 @@
 			children = (
 				9FBFF6B52009731D0065D4E1 /* AppDelegate.swift */,
 				9FBFF6B72009731D0065D4E1 /* ViewController.swift */,
+				9FBFF6D3200973440065D4E1 /* Subtitler.swift */,
+				9FBFF6DC200A803C0065D4E1 /* HashCalculator.swift */,
+				9FBFF6E0200A83930065D4E1 /* SubtitleDownloader.swift */,
 				9FBFF6B92009731D0065D4E1 /* Assets.xcassets */,
 				9FBFF6BB2009731D0065D4E1 /* Main.storyboard */,
 				9FBFF6BE2009731D0065D4E1 /* Info.plist */,
 				9FBFF6BF2009731D0065D4E1 /* Swiftitle.entitlements */,
+				9FBFF6D5200977F90065D4E1 /* Swiftitle-Bridging-Header.h */,
 			);
 			path = Swiftitle;
 			sourceTree = "<group>";
@@ -93,6 +106,14 @@
 				9FBFF6CA2009731D0065D4E1 /* Info.plist */,
 			);
 			path = SwiftitleTests;
+			sourceTree = "<group>";
+		};
+		9FBFF6D9200978D60065D4E1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9FBFF6DA200978D60065D4E1 /* libcommonCrypto.tbd */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -145,7 +166,13 @@
 				TargetAttributes = {
 					9FBFF6B12009731D0065D4E1 = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
 					};
 					9FBFF6C32009731D0065D4E1 = {
 						CreatedOnToolsVersion = 9.2;
@@ -198,6 +225,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9FBFF6B82009731D0065D4E1 /* ViewController.swift in Sources */,
+				9FBFF6DD200A803C0065D4E1 /* HashCalculator.swift in Sources */,
+				9FBFF6E1200A83930065D4E1 /* SubtitleDownloader.swift in Sources */,
+				9FBFF6D4200973440065D4E1 /* Subtitler.swift in Sources */,
 				9FBFF6B62009731D0065D4E1 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -342,14 +372,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Swiftitle/Swiftitle.entitlements;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = R6K8GZF4U9;
 				INFOPLIST_FILE = Swiftitle/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/system",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = ninja.gonzo.Swiftitle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Swiftitle/Swiftitle-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
@@ -358,14 +394,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Swiftitle/Swiftitle.entitlements;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = R6K8GZF4U9;
 				INFOPLIST_FILE = Swiftitle/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/system",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = ninja.gonzo.Swiftitle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Swiftitle/Swiftitle-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
