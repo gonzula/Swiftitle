@@ -160,7 +160,7 @@
                         <subviews>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cp4-AO-P4T">
                                 <rect key="frame" x="173" y="127" width="133" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" enabled="NO" sendsActionOnEndEditing="YES" title="Drag movie files here" id="3mI-A6-UDp">
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" enabled="NO" refusesFirstResponder="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" title="Drag movie files here" id="3mI-A6-UDp">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -181,6 +181,7 @@
                     </view>
                     <connections>
                         <outlet property="destinationView" destination="wQj-QG-Aaq" id="hOp-sU-IAe"/>
+                        <outlet property="label" destination="cp4-AO-P4T" id="YXQ-I1-1kT"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
