@@ -18,20 +18,25 @@ class ViewController: NSViewController {
 
     @IBOutlet weak var label: NSTextField!
 
+    @IBOutlet weak var tableView: NSTableView!
     var isGettingSubtitles = false
 
-    private var moviesToSubtitle = [URL]() {
+    private var moviesToSubtitle = [Movie]() {
         didSet {
             guard !moviesToSubtitle.isEmpty else {
                 label.stringValue = "Drag movie files here"
                 return
             }
 
-            label.stringValue = "Getting subtitle for \(moviesToSubtitle.first!.lastPathComponent)"
+            label.stringValue = "Getting subtitle for \(moviesToSubtitle.first!.name)"
             if moviesToSubtitle.count > 1 {
                 label.stringValue += ", \(moviesToSubtitle.count - 1) remaining"
             }
         }
+    }
+
+    private var waitingMovies: [Movie] {
+        return moviesToSubtitle.filter { $0.state == Movie.State.waiting }
     }
 
     override func viewDidLoad() {
@@ -39,26 +44,31 @@ class ViewController: NSViewController {
     }
 
     func getSubtitles() {
-        guard let url = moviesToSubtitle.first else {
+        guard let movie = waitingMovies.first else {
             isGettingSubtitles = false
             return
         }
 
         isGettingSubtitles = true
+        movie.state = .downloading
+        updateRow(of: movie)
+        print("downloading", movie.name)
         do {
-            try Subtitler(filePath: url.path, language: "pt").addSubtitleToFile { (error) in
-                self.moviesToSubtitle = Array(self.moviesToSubtitle.dropFirst())
+            try Subtitler(filePath: movie.url.path, language: "pt").addSubtitleToFile { (error) in
+                movie.state = error == nil ? .done : .error
+                self.updateRow(of: movie)
                 self.getSubtitles()
             }
         } catch {
-            moviesToSubtitle = Array(moviesToSubtitle.dropFirst())
+            movie.state = .error
+            updateRow(of: movie)
             getSubtitles()
         }
     }
 
-    func getMovies(in urls: [URL]) -> [URL] {
+    func getMovies(in urls: [URL]) -> [Movie] {
         let fm = FileManager.default
-        var filteredURLS = [URL]()
+        var filteredURLS = [Movie]()
 
         for url in urls {
             do {
@@ -70,7 +80,7 @@ class ViewController: NSViewController {
                     let directoryList = try fm.contentsOfDirectory(at: url, includingPropertiesForKeys: nil, options: [.skipsHiddenFiles])
                     filteredURLS.append(contentsOf: getMovies(in: directoryList))
                 } else if url.UTIConformsTo(kUTTypeMovie) {
-                    filteredURLS.append(url)
+                    filteredURLS.append(Movie(url: url))
                 }
             } catch {
                 print(error)
@@ -79,27 +89,42 @@ class ViewController: NSViewController {
 
         return filteredURLS
     }
+
+    func movie(at row: Int) -> Movie {
+        return moviesToSubtitle[row]
+    }
+
+    func row(of movie: Movie) -> Int? {
+        return moviesToSubtitle.index(of: movie)
+    }
+
+    func updateRow(of movie: Movie) {
+        guard let row = self.row(of: movie) else {
+            return
+        }
+
+        tableView.reloadData(forRowIndexes: [row], columnIndexes: [1])
+    }
 }
 
-extension URL {
-    var typeIdentifier: String? {
-        return (try? resourceValues(forKeys: [.typeIdentifierKey]))?.typeIdentifier
-    }
+extension ViewController: NSTableViewDelegate {
 
-    var localizedName: String? {
-        return (try? resourceValues(forKeys: [.localizedNameKey]))?.localizedName
-    }
-
-    func UTIConformsTo(_ type: CFString) -> Bool {
-        return UTTypeConformsTo(typeIdentifier! as CFString, type)
-    }
 }
-extension FileManager {
-    func isDirectory(_ url: URL) -> Bool? {
-        var isDirectory: ObjCBool = false
-        let fm = FileManager.default
-        if fm.fileExists(atPath: url.path, isDirectory: &isDirectory) {
-            return isDirectory.boolValue
+
+extension ViewController: NSTableViewDataSource {
+
+
+    func numberOfRows(in tableView: NSTableView) -> Int {
+        return moviesToSubtitle.count
+    }
+
+    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
+        let movie = self.movie(at: row)
+
+        switch tableColumn!.title {
+        case "Movie": return movie.name
+        case "State": return movie.state.rawValue
+        default: break
         }
 
         return nil
@@ -108,13 +133,14 @@ extension FileManager {
 
 extension ViewController: DestinationViewDelegate {
     func droppedURLS(_ urls: [URL]) {
-        let filteredUrls = getMovies(in: urls)
-        moviesToSubtitle.append(contentsOf: filteredUrls)
+        let filteredMovies = getMovies(in: urls)
         if !isGettingSubtitles {
+            moviesToSubtitle = filteredMovies
             getSubtitles()
+        } else {
+            moviesToSubtitle.append(contentsOf: filteredMovies)
         }
-        for url in getMovies(in: urls) {
-            print(url)
-        }
+
+        tableView.reloadData()
     }
 }

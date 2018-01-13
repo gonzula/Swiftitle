@@ -16,6 +16,7 @@
 		9FBFF6DD200A803C0065D4E1 /* HashCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBFF6DC200A803C0065D4E1 /* HashCalculator.swift */; };
 		9FBFF6E1200A83930065D4E1 /* SubtitleDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBFF6E0200A83930065D4E1 /* SubtitleDownloader.swift */; };
 		9FBFF6E6200A90580065D4E1 /* DestinationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBFF6E5200A90580065D4E1 /* DestinationView.swift */; };
+		9FBFF6E8200AA7860065D4E1 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9FBFF6E7200AA7860065D4E1 /* Movie.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		9FBFF6DC200A803C0065D4E1 /* HashCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashCalculator.swift; sourceTree = "<group>"; };
 		9FBFF6E0200A83930065D4E1 /* SubtitleDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitleDownloader.swift; sourceTree = "<group>"; };
 		9FBFF6E5200A90580065D4E1 /* DestinationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationView.swift; sourceTree = "<group>"; };
+		9FBFF6E7200AA7860065D4E1 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 			children = (
 				9FBFF6B52009731D0065D4E1 /* AppDelegate.swift */,
 				9FBFF6E4200A900C0065D4E1 /* UI */,
+				9FBFF6E9200AA78C0065D4E1 /* Model */,
 				9FBFF6E2200A8FF40065D4E1 /* Helpers */,
 				9FBFF6B92009731D0065D4E1 /* Assets.xcassets */,
 				9FBFF6BE2009731D0065D4E1 /* Info.plist */,
@@ -133,6 +136,14 @@
 				9FBFF6E5200A90580065D4E1 /* DestinationView.swift */,
 			);
 			name = UI;
+			sourceTree = "<group>";
+		};
+		9FBFF6E9200AA78C0065D4E1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9FBFF6E7200AA7860065D4E1 /* Movie.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -243,6 +254,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FBFF6E8200AA7860065D4E1 /* Movie.swift in Sources */,
 				9FBFF6B82009731D0065D4E1 /* ViewController.swift in Sources */,
 				9FBFF6DD200A803C0065D4E1 /* HashCalculator.swift in Sources */,
 				9FBFF6E1200A83930065D4E1 /* SubtitleDownloader.swift in Sources */,
