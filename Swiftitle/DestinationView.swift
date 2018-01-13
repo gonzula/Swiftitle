@@ -47,7 +47,6 @@ class DestinationView: NSView {
             canAccept = true
         }
         return canAccept
-
     }
 
     override func draggingEntered(_ sender: NSDraggingInfo) -> NSDragOperation {
