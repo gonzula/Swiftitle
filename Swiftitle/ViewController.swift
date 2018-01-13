@@ -105,6 +105,17 @@ class ViewController: NSViewController {
 
         tableView.reloadData(forRowIndexes: [row], columnIndexes: [1])
     }
+
+    func add(movies: [Movie]) {
+        if !isGettingSubtitles {
+            moviesToSubtitle = movies
+            getSubtitles()
+        } else {
+            moviesToSubtitle.append(contentsOf: movies)
+        }
+
+        tableView.reloadData()
+    }
 }
 
 extension ViewController: NSTableViewDelegate {
@@ -134,13 +145,6 @@ extension ViewController: NSTableViewDataSource {
 extension ViewController: DestinationViewDelegate {
     func droppedURLS(_ urls: [URL]) {
         let filteredMovies = getMovies(in: urls)
-        if !isGettingSubtitles {
-            moviesToSubtitle = filteredMovies
-            getSubtitles()
-        } else {
-            moviesToSubtitle.append(contentsOf: filteredMovies)
-        }
-
-        tableView.reloadData()
+        add(movies: filteredMovies)
     }
 }
