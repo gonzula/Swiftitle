@@ -24,8 +24,8 @@ class SubtitleDownloader {
     private var request: URLRequest?
 
     private var userAgent: String {
-        let clientName = "Swiftitle"
-        let clientVersion = "1.0"
+        let clientName = Bundle.main.infoDictionary?["CFBundleName"] as! String
+        let clientVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
         let clientURL = "https://github.com/ceafdc/Swiftitle"
         let userAgent = "SubDB/1.0 (\(clientName)/\(clientVersion); \(clientURL))"
         return userAgent
