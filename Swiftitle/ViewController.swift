@@ -16,24 +16,12 @@ class ViewController: NSViewController {
         }
     }
 
-    @IBOutlet weak var label: NSTextField!
-
     @IBOutlet weak var tableView: NSTableView!
-    var isGettingSubtitles = false
-
-    private var moviesToSubtitle = [Movie]() {
-        didSet {
-            guard !moviesToSubtitle.isEmpty else {
-                label.stringValue = "Drag movie files here"
-                return
-            }
-
-            label.stringValue = "Getting subtitle for \(moviesToSubtitle.first!.name)"
-            if moviesToSubtitle.count > 1 {
-                label.stringValue += ", \(moviesToSubtitle.count - 1) remaining"
-            }
-        }
+    var isGettingSubtitles: Bool {
+        return !waitingMovies.isEmpty
     }
+
+    private var moviesToSubtitle = [Movie]()
 
     private var waitingMovies: [Movie] {
         return moviesToSubtitle.filter { $0.state == Movie.State.waiting }
@@ -41,15 +29,15 @@ class ViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        (NSApplication.shared.delegate as! AppDelegate).mainVC = self
     }
 
     func getSubtitles() {
         guard let movie = waitingMovies.first else {
-            isGettingSubtitles = false
             return
         }
 
-        isGettingSubtitles = true
         movie.state = .downloading
         updateRow(of: movie)
         print("downloading", movie.name)
@@ -106,7 +94,12 @@ class ViewController: NSViewController {
         tableView.reloadData(forRowIndexes: [row], columnIndexes: [1])
     }
 
-    func add(movies: [Movie]) {
+    func add(_ urls: [URL]) {
+        let filteredMovies = getMovies(in: urls)
+        add(filteredMovies)
+    }
+
+    func add(_ movies: [Movie]) {
         if !isGettingSubtitles {
             moviesToSubtitle = movies
             getSubtitles()
@@ -144,7 +137,6 @@ extension ViewController: NSTableViewDataSource {
 
 extension ViewController: DestinationViewDelegate {
     func droppedURLS(_ urls: [URL]) {
-        let filteredMovies = getMovies(in: urls)
-        add(movies: filteredMovies)
+        add(urls)
     }
 }

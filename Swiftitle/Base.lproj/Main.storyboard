@@ -158,14 +158,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cp4-AO-P4T">
-                                <rect key="frame" x="173" y="127" width="133" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" enabled="NO" refusesFirstResponder="YES" allowsUndo="NO" sendsActionOnEndEditing="YES" title="Drag movie files here" id="3mI-A6-UDp">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WOV-f0-Ywt">
                                 <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                                 <clipView key="contentView" id="Jid-fW-KKu">
@@ -231,7 +223,6 @@
                             </customView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="cp4-AO-P4T" firstAttribute="centerY" secondItem="m2S-Jp-Qdl" secondAttribute="centerY" id="A0k-LF-HdU"/>
                             <constraint firstAttribute="bottom" secondItem="wQj-QG-Aaq" secondAttribute="bottom" id="DGS-Si-sbW"/>
                             <constraint firstItem="wQj-QG-Aaq" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" id="E8g-bp-UnN"/>
                             <constraint firstAttribute="trailing" secondItem="WOV-f0-Ywt" secondAttribute="trailing" id="Etd-zX-ewG"/>
@@ -239,13 +230,11 @@
                             <constraint firstAttribute="trailing" secondItem="wQj-QG-Aaq" secondAttribute="trailing" id="LU2-6I-voO"/>
                             <constraint firstItem="wQj-QG-Aaq" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="Nf9-i6-ZXv"/>
                             <constraint firstAttribute="bottom" secondItem="WOV-f0-Ywt" secondAttribute="bottom" id="ebh-aN-0Bl"/>
-                            <constraint firstItem="cp4-AO-P4T" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="mU7-1f-721"/>
                             <constraint firstItem="WOV-f0-Ywt" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="nC5-Jw-cu7"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="destinationView" destination="wQj-QG-Aaq" id="hOp-sU-IAe"/>
-                        <outlet property="label" destination="cp4-AO-P4T" id="YXQ-I1-1kT"/>
                         <outlet property="tableView" destination="sRR-jM-ipL" id="egk-QE-Poy"/>
                     </connections>
                 </viewController>

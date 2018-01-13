@@ -11,7 +11,7 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-
+    var mainVC: ViewController?
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
@@ -21,6 +21,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // Insert code here to tear down your application
     }
 
+    func application(_ application: NSApplication, open urls: [URL]) {
+        mainVC?.add(urls)
+    }
+
+    func applicationShouldTerminateAfterLastWindowClosed() -> Bool {
+        return true
+    }
 
 }
 

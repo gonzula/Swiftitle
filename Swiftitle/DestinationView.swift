@@ -34,7 +34,7 @@ class DestinationView: NSView {
     }
 
     func setup() {
-        registerForDraggedTypes([.fileURL])
+        registerForDraggedTypes([kUTTypeFileURL as NSPasteboard.PasteboardType])
     }
 
     func shouldAllowDrag(_ draggingInfo: NSDraggingInfo) -> Bool {
