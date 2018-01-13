@@ -18,6 +18,8 @@ class ViewController: NSViewController {
 
     @IBOutlet weak var label: NSTextField!
 
+    var isGettingSubtitles = false
+
     private var moviesToSubtitle = [URL]() {
         didSet {
             guard !moviesToSubtitle.isEmpty else {
@@ -38,9 +40,11 @@ class ViewController: NSViewController {
 
     func getSubtitles() {
         guard let url = moviesToSubtitle.first else {
+            isGettingSubtitles = false
             return
         }
 
+        isGettingSubtitles = true
         do {
             try Subtitler(filePath: url.path, language: "pt").addSubtitleToFile { (error) in
                 self.moviesToSubtitle = Array(self.moviesToSubtitle.dropFirst())
@@ -106,6 +110,9 @@ extension ViewController: DestinationViewDelegate {
     func droppedURLS(_ urls: [URL]) {
         let filteredUrls = getMovies(in: urls)
         moviesToSubtitle.append(contentsOf: filteredUrls)
+        if !isGettingSubtitles {
+            getSubtitles()
+        }
         for url in getMovies(in: urls) {
             print(url)
         }
