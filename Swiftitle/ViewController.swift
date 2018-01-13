@@ -10,18 +10,20 @@ import Cocoa
 
 class ViewController: NSViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override var representedObject: Any? {
+    @IBOutlet weak var destinationView: DestinationView! {
         didSet {
-        // Update the view, if already loaded.
+            destinationView.delegate = self
         }
     }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
+    }
 }
 
+extension ViewController: DestinationViewDelegate {
+    func droppedURLS(_ urls: [URL]) {
+        print(urls)
+    }
+}
